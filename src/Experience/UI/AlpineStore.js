@@ -19,17 +19,17 @@ Alpine.store('fortune', {
     asking: {
         welcometext: "What do you seek",
         description: "You get to consult the spirits once today", 
-        image:'./images/asking/1.png'
+        image:'/images/asking/1.png'
     },
     deliberating: {
         thinkingtext: "Thinking..",
         description: "Consulting the spirits", 
-        image:'./images/deliberation/1.png'
+        image:'/images/deliberation/1.png'
     },
     revealing: {
         revealtext: "Behold!",
         description: "They have spoken", 
-        image:'./images/revealing/1.png'
+        image:'/images/revealing/1.png'
     },
 
     // fortunes: [
