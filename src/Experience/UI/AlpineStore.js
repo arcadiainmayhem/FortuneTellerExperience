@@ -59,7 +59,7 @@ Alpine.store('fortune', {
         // }, 5000);
 
         //Link to LLM ( GROQ ) API to fetch answer for fortune question
-        const response = await fetch('/api/fortune', {
+        const response = await fetch('api/fortune', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ question: this.userQuestion }) //calling vercel function 
