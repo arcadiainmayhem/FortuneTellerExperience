@@ -32,14 +32,14 @@ Alpine.store('fortune', {
         image:'./images/revealing/1.png'
     },
 
-    fortunes: [
-    "The path you seek will reveal itself soon",
-    "Trust your instincts, they guide you true",
-    "A surprise awaits in an unexpected place"
-    ],
+    // fortunes: [
+    // "The path you seek will reveal itself soon",
+    // "Trust your instincts, they guide you true",
+    // "A surprise awaits in an unexpected place"
+    // ],
 
 
-    submitQuestion() {
+    async submitQuestion() {
         if (!this.userQuestion.trim()){
             this.showEmptyError = true;
             return;
@@ -48,14 +48,26 @@ Alpine.store('fortune', {
 
         this.showEmptyError = false;
 
+        //immediately shows deliberating state
         this.state = 'deliberating';
 
-        const randomIndex = Math.floor(Math.random() * this.fortunes.length);
-        this.chosenFortune = this.fortunes[randomIndex];
+        // const randomIndex = Math.floor(Math.random() * this.fortunes.length);
+        // this.chosenFortune = this.fortunes[randomIndex];
     
-        setTimeout(() => {
-            this.state = 'revealing';
-        }, 5000);
+        // setTimeout(() => {
+        //     this.state = 'revealing';
+        // }, 5000);
+
+        //Link to LLM ( GROQ ) API to fetch answer for fortune question
+        const response = await fetch('/api/fortune', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ question: this.userQuestion }) //calling vercel function 
+        });
+
+        const data = await response.json();
+        this.chosenFortune = data.fortune;
+        this.state = 'revealing';
 
     },
     
