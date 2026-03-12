@@ -1,0 +1,10 @@
+{
+  "functions": {
+    "src/api/fortune.js": {
+      "runtime": "@vercel/node"
+    }
+  },
+  "rewrites": [
+    { "source": "/api/fortune", "destination": "/src/api/fortune.js" }
+  ]
+}
