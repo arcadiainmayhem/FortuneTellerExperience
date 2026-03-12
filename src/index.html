@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fortune Teller</title>
+  <link rel="stylesheet" href="/style.css">
+
+  <!--Prevent unstylised connection-->
+  <style>
+    [x-cloak] {
+      display: none !important
+    }
+  </style>
+
+</head>
+
+<body>
+  <script type="module" src="/main.js"></script>
+
+  <!-- DEBUGGIN -->
+  <!-- <div x-data="{ test: ' Alpine Works! '}">
+    <p x-text="test"></p>
+  </div> -->
+
+  <!--THREE JS CANVAS-->
+  <canvas id="fortune-teller-canvas"></canvas>
+
+  <!--EXPERIENCE UI-->
+  <div id="experience-ui" x-data x-init="$store.fortune?.init()" x-cloak>
+
+    <!--FORTUNE TELLER TEMPLATE-->
+
+    <!-- FORTUNE TELLER TITLE -->
+
+    <template x-if="$store.fortune.state === 'asking' ">
+      <div class="fortune-room">
+        <!--ASKING STATE-->
+        <!--ASKING - SHOW IMAGE-->
+        <div class="askingImage">
+          <img :src="$store.fortune.asking.image">
+        </div>
+
+        <!--ASKING - SHOW  TEXT - WELCOME TEXT AND DESCRIPTION-->
+        <div class="fortune-room-contents">
+          <h1 x-text="$store.fortune[$store.fortune.state].welcometext"></h1>
+          <p x-text="$store.fortune[$store.fortune.state].description"></p>
+        </div>
+
+
+        <!-- ASKING -  SHOW INPUT FIELD AREA-->
+        <!-- ASKING -  SHOW SUBMIT BUTTON AREA-->
+        <div class="Submit-Button">
+          <input x-model="$store.fortune.userQuestion" placeholder="Type Your Question...">
+          <button @click="$store.fortune.submitQuestion()"> Ask the Spirits </button>
+          <p x-show="$store.fortune.showEmptyError">Please ask a question!</p>
+        </div>
+      </div>
+    </template>
+
+    <!--ASKING - MAYBE INTERACTION LAYER? -->
+
+    <!-- DELIBERATING STATE-->
+
+    <!--DELIBERATING - DELIBERATING TEXT-->
+    <template x-if="$store.fortune.state === 'deliberating'">
+
+      <div class="fortune-room">
+
+        <!-- DELIBERATING -  DELIBERATING IMAGE-->
+        <div class="deliberationImage">
+          <img :src="$store.fortune[$store.fortune.state].image">
+        </div>
+
+        <h1 x-text="$store.fortune[$store.fortune.state].thinkingtext"></h1>
+        <p x-text="$store.fortune[$store.fortune.state].description"></p>
+
+      </div>
+    </template>
+
+
+
+    <!--REVEALING  STATE -->
+
+
+    <!--REVEALING - REVEALING TEXT-->
+    <template x-if="$store.fortune.state === 'revealing'">
+      <div class="fortune-room">
+
+        <!-- REVEALING -  REVEALING IMAGE-->
+        <div class="revealingImage">
+          <img :src="$store.fortune[$store.fortune.state].image">
+
+        </div>
+        <h1 x-text="$store.fortune[$store.fortune.state].revealtext"></h1>
+        <p x-text="$store.fortune.chosenFortune"></p>
+
+        <!-- TRY AGAIN BUTTON -->
+        <div class="Try-Again-Button">
+          <button @click="$store.fortune.askAgain()"> Consult the Spirits Again </button>
+        </div>
+
+      </div>
+
+    </template>
+
+
+
+
+  </div>
+
+</body>
+
+</html>
