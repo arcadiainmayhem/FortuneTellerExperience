@@ -1,6 +1,6 @@
 //vite config
 export default {
-  root: 'src/',
+  //root: 'src/',
   publicDir: '../public/',
   build: {
     outDir: '../dist',

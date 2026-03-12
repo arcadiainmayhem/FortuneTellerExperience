@@ -1,5 +1,5 @@
 import Alpine from 'alpinejs'
-import './Experience/UI/AlpineStore.js'
+import './src/Experience/UI/AlpineStore.js'
 import * as THREE from 'three'
 
 
